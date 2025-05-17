@@ -5,9 +5,10 @@ import { PageCollection } from "./collections/page";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
+  process.env.CF_PAGES_BRANCH ||       // 🌩️ Cloudflare Pages
+  process.env.GITHUB_REF_NAME ||       // 🐙 GitHub Actions (si haces CI/CD)
+  process.env.GITHUB_BRANCH ||         // General fallback
+  process.env.HEAD ||                  // Tina Cloud local dev
   "main";
 
 export default defineConfig({
